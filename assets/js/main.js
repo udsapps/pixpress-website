@@ -329,7 +329,7 @@
     if (!ctx) return;
 
     var DPR = Math.min(window.devicePixelRatio || 1, 2);
-    var PARTICLE_COUNT = 42;
+    var PARTICLE_COUNT = 34;
     var particles = [];
     var width = 0;
     var height = 0;
@@ -361,7 +361,7 @@
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          size: 1.5 + Math.random() * 2.5,
+          size: 3.5 + Math.random() * 4.5,
           speedX: (Math.random() - 0.5) * 0.18,
           speedY: (Math.random() - 0.5) * 0.18,
           color: colors[i % 2],
