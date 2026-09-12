@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://udsapps.github.io/pixpress-website/sitemap.xml
+Sitemap: https://getpixpress.com/sitemap.xml
