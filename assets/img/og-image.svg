@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1D4FC4"/>
+      <stop offset="1" stop-color="#2F6FED"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <g transform="translate(80,80)">
+    <rect width="96" height="96" rx="22" fill="#ffffff"/>
+    <rect x="10" y="10" width="76" height="76" rx="16" fill="none"/>
+    <g transform="translate(6,6) scale(0.42)">
+      <rect x="46" y="58" width="100" height="76" rx="10" fill="#3B7CF6" opacity="0.18"/>
+      <rect x="38" y="50" width="100" height="76" rx="10" fill="#2F6FED"/>
+    </g>
+  </g>
+  <text x="80" y="260" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="64" font-weight="800" fill="#ffffff">PixPress</text>
+  <text x="80" y="330" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="34" font-weight="600" fill="#EAF0FE">Compress any photo to an exact KB.</text>
+  <text x="80" y="378" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="34" font-weight="600" fill="#EAF0FE">Instantly. 100% offline.</text>
+
+  <g transform="translate(80,440)">
+    <rect width="420" height="56" rx="12" fill="#ffffff" opacity="0.12"/>
+    <text x="24" y="36" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="20" font-weight="700" fill="#ffffff">UPSC &#183; SSC &#183; IBPS &#183; Banking &#183; NEET &#183; JEE</text>
+  </g>
+
+  <g transform="translate(80,520)">
+    <circle cx="12" cy="8" r="8" fill="#16A34A"/>
+    <text x="32" y="14" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">No uploads &#183; No cloud &#183; No data leaves your phone</text>
+  </g>
+</svg>
