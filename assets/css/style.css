@@ -993,15 +993,28 @@ h1, h2, h3 { color: var(--color-ink); font-weight: 800; letter-spacing: -0.02em;
   border-color: var(--color-ink);
 }
 
-.showcase-panel {
-  display: none;
-  background: var(--color-primary-tint);
+.showcase-panel-wrap {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   border-radius: var(--radius-lg);
+}
+.showcase-panel-wrap::-webkit-scrollbar { display: none; }
+
+.showcase-panel {
+  display: grid;
+  flex: 0 0 100%;
+  width: 100%;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: var(--color-primary-tint);
   padding: 32px 24px;
   gap: 32px;
   align-items: center;
 }
-.showcase-panel.is-active { display: grid; }
 @media (min-width: 860px) {
   .showcase-panel { grid-template-columns: 1fr 1fr; padding: 48px; gap: 40px; }
 }

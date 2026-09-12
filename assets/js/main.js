@@ -96,28 +96,58 @@
     });
   }
 
-  // ---------- Tabbed feature showcase ----------
+  // ---------- Tabbed feature showcase (swipeable like Android ViewPager) ----------
   (function () {
     var tabs = document.querySelectorAll(".showcase-tab");
-    if (!tabs.length) return;
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        tabs.forEach(function (t) {
-          t.classList.remove("is-active");
-          t.setAttribute("aria-selected", "false");
-        });
-        tab.classList.add("is-active");
-        tab.setAttribute("aria-selected", "true");
-        document.querySelectorAll(".showcase-panel").forEach(function (p) {
-          p.classList.remove("is-active");
-          p.hidden = true;
-        });
-        var panel = document.getElementById(tab.getAttribute("aria-controls"));
-        if (panel) {
-          panel.hidden = false;
-          panel.classList.add("is-active");
-        }
+    var wrap = document.querySelector(".showcase-panel-wrap");
+    var panels = document.querySelectorAll(".showcase-panel");
+    if (!tabs.length || !wrap || !panels.length) return;
+
+    var programmatic = false;
+    var programmaticTimer = null;
+
+    function setActive(index, scrollToPanel) {
+      tabs.forEach(function (t, i) {
+        var isActive = i === index;
+        t.classList.toggle("is-active", isActive);
+        t.setAttribute("aria-selected", isActive ? "true" : "false");
       });
+      panels.forEach(function (p, i) {
+        p.classList.toggle("is-active", i === index);
+        p.setAttribute("aria-hidden", i === index ? "false" : "true");
+      });
+      tabs[index].scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
+      if (scrollToPanel) {
+        programmatic = true;
+        panels[index].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
+        window.clearTimeout(programmaticTimer);
+        programmaticTimer = window.setTimeout(function () {
+          programmatic = false;
+        }, 600);
+      }
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () {
+        setActive(i, true);
+      });
+    });
+
+    // Detects which panel the user swiped/scrolled to, and syncs the active tab.
+    var observer = new IntersectionObserver(
+      function (entries) {
+        if (programmatic) return;
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+            var index = Array.prototype.indexOf.call(panels, entry.target);
+            if (index !== -1) setActive(index, false);
+          }
+        });
+      },
+      { root: wrap, threshold: [0.6] }
+    );
+    panels.forEach(function (p) {
+      observer.observe(p);
     });
   })();
 
