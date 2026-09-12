@@ -170,6 +170,7 @@
   (function () {
     var valueEl = document.getElementById("demoValue");
     var progressEl = document.getElementById("demoProgress");
+    var heroSection = document.querySelector(".hero");
     if (!valueEl || !progressEl) return;
 
     var START_KB = 2400;
@@ -193,15 +194,24 @@
     var HOLD_MS = 1600;
     var RESET_PAUSE_MS = 650;
 
+    // Only animate while the hero is actually on screen and the tab is visible —
+    // this loop used to run forever in the background, burning CPU/battery for
+    // no visible benefit once the user scrolled past it or switched tabs.
+    var active = false;
+    var pendingTimer = null;
+    var rafId = null;
+
     function easeOutCubic(t) {
       return 1 - Math.pow(1 - t, 3);
     }
 
     function runCycle() {
+      if (!active) return;
       var start = null;
       progressEl.classList.remove("is-done");
 
       function step(ts) {
+        if (!active) return;
         if (start === null) start = ts;
         var elapsed = ts - start;
         var t = Math.min(1, elapsed / COMPRESS_MS);
@@ -210,21 +220,63 @@
         valueEl.textContent = formatSize(currentKb);
         progressEl.style.width = eased * 100 + "%";
         if (t < 1) {
-          requestAnimationFrame(step);
+          rafId = requestAnimationFrame(step);
         } else {
           progressEl.classList.add("is-done");
-          setTimeout(function () {
+          pendingTimer = setTimeout(function () {
+            if (!active) return;
             progressEl.classList.remove("is-done");
             valueEl.textContent = formatSize(START_KB);
             progressEl.style.width = "0%";
-            setTimeout(runCycle, RESET_PAUSE_MS);
+            pendingTimer = setTimeout(runCycle, RESET_PAUSE_MS);
           }, HOLD_MS);
         }
       }
-      requestAnimationFrame(step);
+      rafId = requestAnimationFrame(step);
     }
 
-    runCycle();
+    function start() {
+      if (active) return;
+      active = true;
+      runCycle();
+    }
+
+    function stop() {
+      active = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      if (pendingTimer) clearTimeout(pendingTimer);
+      rafId = null;
+      pendingTimer = null;
+    }
+
+    if (heroSection && "IntersectionObserver" in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && document.visibilityState === "visible") {
+              start();
+            } else {
+              stop();
+            }
+          });
+        },
+        { threshold: 0 }
+      );
+      io.observe(heroSection);
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "hidden") {
+          stop();
+        } else {
+          var rect = heroSection.getBoundingClientRect();
+          if (rect.bottom > 0 && rect.top < window.innerHeight) {
+            start();
+          }
+        }
+      });
+    } else {
+      start();
+    }
   })();
 
   // ---------- Hero shot pointer tilt (desktop only) ----------
@@ -235,16 +287,172 @@
     var canHover = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (!canHover || prefersReducedMotion) return;
 
-    visual.addEventListener("mousemove", function (e) {
-      var rect = visual.getBoundingClientRect();
-      var relX = (e.clientX - rect.left) / rect.width - 0.5;
-      var relY = (e.clientY - rect.top) / rect.height - 0.5;
+    // Cache the rect once per hover (it doesn't change mid-gesture) instead of
+    // calling getBoundingClientRect() on every mousemove, which forces a
+    // layout read dozens of times a second and was a real source of jank.
+    var rect = null;
+    var pendingEvent = null;
+    var rafScheduled = false;
+
+    function applyTilt() {
+      rafScheduled = false;
+      if (!rect || !pendingEvent) return;
+      var relX = (pendingEvent.clientX - rect.left) / rect.width - 0.5;
+      var relY = (pendingEvent.clientY - rect.top) / rect.height - 0.5;
       var rotateY = relX * 10;
       var rotateX = relY * -10;
       device.style.transform = "rotateY(" + rotateY + "deg) rotateX(" + rotateX + "deg)";
+    }
+
+    visual.addEventListener("mouseenter", function () {
+      rect = visual.getBoundingClientRect();
+    });
+    visual.addEventListener("mousemove", function (e) {
+      pendingEvent = e;
+      if (!rafScheduled) {
+        rafScheduled = true;
+        requestAnimationFrame(applyTilt);
+      }
     });
     visual.addEventListener("mouseleave", function () {
+      rect = null;
       device.style.transform = "";
     });
+  })();
+
+  // ---------- Hero floating pixel background ----------
+  (function () {
+    var canvas = document.getElementById("heroCanvas");
+    var heroSection = document.querySelector(".hero");
+    if (!canvas || !heroSection) return;
+    var ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    var DPR = Math.min(window.devicePixelRatio || 1, 2);
+    var PARTICLE_COUNT = 42;
+    var particles = [];
+    var width = 0;
+    var height = 0;
+    var active = false;
+    var rafId = null;
+
+    function themeColors() {
+      var styles = getComputedStyle(document.documentElement);
+      return [
+        (styles.getPropertyValue("--color-primary") || "#2F6FED").trim(),
+        (styles.getPropertyValue("--color-accent") || "#16A34A").trim()
+      ];
+    }
+
+    function resize() {
+      width = heroSection.clientWidth;
+      height = heroSection.clientHeight;
+      canvas.width = width * DPR;
+      canvas.height = height * DPR;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+
+    function makeParticles() {
+      var colors = themeColors();
+      particles = [];
+      for (var i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: 1.5 + Math.random() * 2.5,
+          speedX: (Math.random() - 0.5) * 0.18,
+          speedY: (Math.random() - 0.5) * 0.18,
+          color: colors[i % 2],
+          opacity: 0.15 + Math.random() * 0.25
+        });
+      }
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      for (var i = 0; i < particles.length; i++) {
+        var p = particles[i];
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if (p.x < -5) p.x = width + 5;
+        if (p.x > width + 5) p.x = -5;
+        if (p.y < -5) p.y = height + 5;
+        if (p.y > height + 5) p.y = -5;
+        ctx.globalAlpha = p.opacity;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function loop() {
+      if (!active) return;
+      draw();
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function start() {
+      if (active) return;
+      active = true;
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function stop() {
+      active = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+
+    resize();
+    makeParticles();
+
+    if (prefersReducedMotion) {
+      draw();
+      return;
+    }
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting && document.visibilityState === "visible") {
+              start();
+            } else {
+              stop();
+            }
+          });
+        },
+        { threshold: 0 }
+      );
+      io.observe(heroSection);
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "hidden") {
+          stop();
+        } else {
+          var rect = heroSection.getBoundingClientRect();
+          if (rect.bottom > 0 && rect.top < window.innerHeight) {
+            start();
+          }
+        }
+      });
+    } else {
+      start();
+    }
+
+    var resizeTimer = null;
+    window.addEventListener(
+      "resize",
+      function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          resize();
+          makeParticles();
+        }, 200);
+      },
+      { passive: true }
+    );
   })();
 })();
