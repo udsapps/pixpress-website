@@ -324,7 +324,53 @@ a { color: var(--color-primary); }
 }
 
 /* ---------- Sections / headings ---------- */
-section { padding: 88px 0; }
+section { padding: 88px 0; position: relative; overflow: hidden; }
+section > .container { position: relative; z-index: 1; }
+
+/* ---------- Ambient background blobs (abstract, CSS-only, GPU-cheap) ---------- */
+.ambient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.16;
+  pointer-events: none;
+  z-index: 0;
+}
+.ambient-blob-1 {
+  width: 380px; height: 380px;
+  top: -140px; right: -100px;
+  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+  animation: ambientDriftA 19s ease-in-out infinite;
+}
+.ambient-blob-2 {
+  width: 320px; height: 320px;
+  bottom: -120px; left: -90px;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+  animation: ambientDriftB 23s ease-in-out infinite;
+}
+.ambient-blob-3 {
+  width: 300px; height: 300px;
+  top: -100px; left: -80px;
+  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
+  animation: ambientDriftA 21s ease-in-out infinite;
+}
+.ambient-blob-4 {
+  width: 340px; height: 340px;
+  bottom: -110px; right: -90px;
+  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+  animation: ambientDriftB 17s ease-in-out infinite;
+}
+@keyframes ambientDriftA {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-26px, 24px) scale(1.08); }
+}
+@keyframes ambientDriftB {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(22px, -20px) scale(1.1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-blob { animation: none; }
+}
 .section-eyebrow {
   display: inline-block;
   font-size: 0.8rem;
