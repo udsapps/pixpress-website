@@ -234,7 +234,7 @@
     var HOLD_MS = 1600;
     var RESET_PAUSE_MS = 650;
 
-    // Only animate while the hero is actually on screen and the tab is visible —
+    // Only animate while the hero is actually on screen and the tab is visible:
     // this loop used to run forever in the background, burning CPU/battery for
     // no visible benefit once the user scrolled past it or switched tabs.
     var active = false;
