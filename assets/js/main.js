@@ -105,8 +105,18 @@
 
     var programmatic = false;
     var programmaticTimer = null;
+    var current = 0;
+
+    // Scrolls only the tab strip itself (never the page) to reveal the active pill.
+    function revealTab(tab) {
+      var strip = tab.parentElement;
+      var target = tab.offsetLeft - (strip.clientWidth - tab.offsetWidth) / 2;
+      strip.scrollTo({ left: Math.max(0, target), behavior: "smooth" });
+    }
 
     function setActive(index, scrollToPanel) {
+      if (index === current && !scrollToPanel) return;
+      current = index;
       tabs.forEach(function (t, i) {
         var isActive = i === index;
         t.classList.toggle("is-active", isActive);
@@ -116,7 +126,7 @@
         p.classList.toggle("is-active", i === index);
         p.setAttribute("aria-hidden", i === index ? "false" : "true");
       });
-      tabs[index].scrollIntoView({ behavior: "smooth", inline: "nearest", block: "nearest" });
+      revealTab(tabs[index]);
       if (scrollToPanel) {
         programmatic = true;
         panels[index].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
