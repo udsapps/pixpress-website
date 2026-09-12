@@ -773,16 +773,30 @@ h1, h2, h3 { color: var(--color-ink); font-weight: 800; letter-spacing: -0.02em;
 .bento-card {
   background: var(--color-surface);
   border-radius: var(--radius-md);
+  border: 1px solid transparent;
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition: box-shadow 0.35s ease, transform 0.35s cubic-bezier(.34,1.56,.64,1), border-color 0.3s ease;
 }
 .bento-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-4px);
+  box-shadow: 0 16px 32px color-mix(in srgb, var(--color-primary) 18%, transparent);
+  border-color: color-mix(in srgb, var(--color-primary) 35%, transparent);
+  transform: translateY(-6px) scale(1.02);
 }
 @media (prefers-reduced-motion: reduce) {
   .bento-card { transition: none; }
   .bento-card:hover { transform: none; }
+}
+
+/* Springy pop-in for the features grid, distinct from the site's default fade-up reveal */
+.bento-tile.reveal {
+  transition: opacity 0.6s cubic-bezier(.34,1.56,.64,1), transform 0.6s cubic-bezier(.34,1.56,.64,1);
+  transform: translateY(24px) scale(0.9);
+}
+.bento-tile.reveal.is-visible {
+  transform: translateY(0) scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .bento-tile.reveal { transform: none; }
 }
 
 .bento-tile {
@@ -800,9 +814,13 @@ h1, h2, h3 { color: var(--color-ink); font-weight: 800; letter-spacing: -0.02em;
   color: var(--color-primary);
   display: grid;
   place-items: center;
-  transition: transform 0.25s cubic-bezier(.34,1.56,.64,1);
+  transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), background 0.3s ease, color 0.3s ease;
 }
-.bento-card:hover .feature-icon { transform: scale(1.1) rotate(-4deg); }
+.bento-card:hover .feature-icon {
+  transform: scale(1.15) rotate(-8deg);
+  background: var(--color-primary);
+  color: #fff;
+}
 @media (prefers-reduced-motion: reduce) {
   .bento-card:hover .feature-icon { transform: none; }
 }
@@ -812,12 +830,15 @@ h1, h2, h3 { color: var(--color-ink); font-weight: 800; letter-spacing: -0.02em;
   font-size: 0.9rem;
   font-weight: 700;
   line-height: 1.35;
+  transition: color 0.25s ease;
 }
 .bento-tag {
   font-size: 0.76rem;
   font-weight: 600;
   color: var(--color-text-muted);
+  transition: color 0.25s ease;
 }
+.bento-card:hover .bento-tag { color: var(--color-primary); }
 
 /* ---------- How it works ---------- */
 .steps {
