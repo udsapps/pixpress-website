@@ -327,49 +327,131 @@ a { color: var(--color-primary); }
 section { padding: 88px 0; position: relative; overflow: hidden; }
 section > .container { position: relative; z-index: 1; }
 
-/* ---------- Ambient background blobs (abstract, CSS-only, GPU-cheap) ---------- */
-.ambient-blob {
+/* ---------- Ambient background particles (abstract, CSS-only, GPU-cheap) ---------- */
+/* Small drifting dots instead of a static color glow: one element carries two
+   pseudo-element companions, so each section gets 3 particles from a single div. */
+.ambient-blob,
+.ambient-blob::before,
+.ambient-blob::after {
   position: absolute;
   border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.16;
   pointer-events: none;
   z-index: 0;
+  filter: blur(1px);
 }
+.ambient-blob::before,
+.ambient-blob::after { content: ""; }
+
 .ambient-blob-1 {
-  width: 380px; height: 380px;
-  top: -140px; right: -100px;
-  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
-  animation: ambientDriftA 19s ease-in-out infinite;
+  width: 12px; height: 12px;
+  top: 16%; right: 10%;
+  background: var(--color-primary);
+  opacity: 0.4;
+  animation: driftA 22s ease-in-out infinite;
 }
+.ambient-blob-1::before {
+  width: 8px; height: 8px;
+  top: 140px; right: 220px;
+  background: var(--color-accent);
+  opacity: 0.32;
+  animation: driftB 27s ease-in-out infinite;
+}
+.ambient-blob-1::after {
+  width: 6px; height: 6px;
+  top: -60px; right: 60px;
+  background: var(--color-primary);
+  opacity: 0.28;
+  animation: driftC 19s ease-in-out infinite;
+}
+
 .ambient-blob-2 {
-  width: 320px; height: 320px;
-  bottom: -120px; left: -90px;
-  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
-  animation: ambientDriftB 23s ease-in-out infinite;
+  width: 11px; height: 11px;
+  bottom: 14%; left: 9%;
+  background: var(--color-accent);
+  opacity: 0.38;
+  animation: driftB 25s ease-in-out infinite;
 }
+.ambient-blob-2::before {
+  width: 8px; height: 8px;
+  bottom: 130px; left: 200px;
+  background: var(--color-primary);
+  opacity: 0.3;
+  animation: driftC 21s ease-in-out infinite;
+}
+.ambient-blob-2::after {
+  width: 6px; height: 6px;
+  bottom: -50px; left: 40px;
+  background: var(--color-accent);
+  opacity: 0.26;
+  animation: driftA 29s ease-in-out infinite;
+}
+
 .ambient-blob-3 {
-  width: 300px; height: 300px;
-  top: -100px; left: -80px;
-  background: radial-gradient(circle, var(--color-accent) 0%, transparent 70%);
-  animation: ambientDriftA 21s ease-in-out infinite;
+  width: 12px; height: 12px;
+  top: 18%; left: 8%;
+  background: var(--color-accent);
+  opacity: 0.4;
+  animation: driftC 20s ease-in-out infinite;
 }
+.ambient-blob-3::before {
+  width: 8px; height: 8px;
+  top: 150px; left: 210px;
+  background: var(--color-primary);
+  opacity: 0.32;
+  animation: driftA 26s ease-in-out infinite;
+}
+.ambient-blob-3::after {
+  width: 6px; height: 6px;
+  top: -50px; left: 70px;
+  background: var(--color-accent);
+  opacity: 0.28;
+  animation: driftB 23s ease-in-out infinite;
+}
+
 .ambient-blob-4 {
-  width: 340px; height: 340px;
-  bottom: -110px; right: -90px;
-  background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
-  animation: ambientDriftB 17s ease-in-out infinite;
+  width: 11px; height: 11px;
+  bottom: 16%; right: 9%;
+  background: var(--color-primary);
+  opacity: 0.38;
+  animation: driftA 24s ease-in-out infinite;
 }
-@keyframes ambientDriftA {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-26px, 24px) scale(1.08); }
+.ambient-blob-4::before {
+  width: 8px; height: 8px;
+  bottom: 140px; right: 200px;
+  background: var(--color-accent);
+  opacity: 0.3;
+  animation: driftB 28s ease-in-out infinite;
 }
-@keyframes ambientDriftB {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(22px, -20px) scale(1.1); }
+.ambient-blob-4::after {
+  width: 6px; height: 6px;
+  bottom: -60px; right: 50px;
+  background: var(--color-primary);
+  opacity: 0.26;
+  animation: driftC 18s ease-in-out infinite;
+}
+
+@keyframes driftA {
+  0%, 100% { transform: translate(0, 0); }
+  25%  { transform: translate(-60px, 40px); }
+  50%  { transform: translate(-110px, -20px); }
+  75%  { transform: translate(-40px, -60px); }
+}
+@keyframes driftB {
+  0%, 100% { transform: translate(0, 0); }
+  25%  { transform: translate(70px, -30px); }
+  50%  { transform: translate(30px, 60px); }
+  75%  { transform: translate(100px, 20px); }
+}
+@keyframes driftC {
+  0%, 100% { transform: translate(0, 0); }
+  25%  { transform: translate(40px, 70px); }
+  50%  { transform: translate(-50px, 90px); }
+  75%  { transform: translate(-70px, 20px); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ambient-blob { animation: none; }
+  .ambient-blob,
+  .ambient-blob::before,
+  .ambient-blob::after { animation: none; }
 }
 .section-eyebrow {
   display: inline-block;
