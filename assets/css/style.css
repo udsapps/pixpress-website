@@ -801,11 +801,26 @@ h1, h2, h3 { color: var(--color-ink); font-weight: 800; letter-spacing: -0.02em;
 
 .bento-tile {
   grid-column: span 1;
+  position: relative;
+  min-height: 128px;
   padding: 18px;
+  overflow: hidden;
+}
+.bento-tile .tile-front {
   display: flex;
   flex-direction: column;
   gap: 12px;
   justify-content: center;
+  height: 100%;
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(.34,1.56,.64,1);
+}
+.bento-card:hover .tile-front,
+.bento-card:focus-within .tile-front {
+  opacity: 0;
+  transform: scale(0.92);
+}
+@media (prefers-reduced-motion: reduce) {
+  .bento-tile .tile-front { transition: none; }
 }
 .bento-tile .feature-icon {
   width: 40px; height: 40px;
@@ -839,6 +854,30 @@ h1, h2, h3 { color: var(--color-ink); font-weight: 800; letter-spacing: -0.02em;
   transition: color 0.25s ease;
 }
 .bento-card:hover .bento-tag { color: var(--color-primary); }
+
+.bento-desc {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.3s ease, transform 0.35s cubic-bezier(.34,1.56,.64,1);
+  pointer-events: none;
+}
+.bento-card:hover .bento-desc,
+.bento-card:focus-within .bento-desc {
+  opacity: 1;
+  transform: scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .bento-desc { transition: none; }
+}
 
 /* ---------- How it works ---------- */
 .steps {
