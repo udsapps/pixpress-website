@@ -98,6 +98,48 @@
     });
   }
 
+  // ---------- Nav scroll-spy ----------
+  // Highlights whichever section is currently in view, not just whichever
+  // link was last clicked, so scrolling manually keeps the nav in sync.
+  (function () {
+    var navLinks = document.querySelectorAll('.main-nav a[href^="#"], .mobile-nav a[href^="#"]');
+    if (!navLinks.length || !("IntersectionObserver" in window)) return;
+
+    var sections = [];
+    navLinks.forEach(function (link) {
+      var id = link.getAttribute("href").slice(1);
+      var section = document.getElementById(id);
+      if (section && sections.indexOf(section) === -1) sections.push(section);
+    });
+    if (!sections.length) return;
+
+    function setActive(id) {
+      navLinks.forEach(function (link) {
+        link.classList.toggle("is-active", link.getAttribute("href") === "#" + id);
+      });
+    }
+
+    // Intersection ratio isn't comparable across sections of very different
+    // heights (a short section barely overlapping the band scores higher
+    // than a tall one that dominates it), so track visibility per section
+    // and, among those currently in the band, use the last one in document
+    // order, i.e. the one the user has scrolled furthest into.
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          entry.target.dataset.spyVisible = entry.isIntersecting ? "1" : "";
+        });
+        var current = null;
+        sections.forEach(function (section) {
+          if (section.dataset.spyVisible) current = section;
+        });
+        if (current) setActive(current.id);
+      },
+      { rootMargin: "-30% 0px -60% 0px", threshold: [0, 1] }
+    );
+    sections.forEach(function (section) { io.observe(section); });
+  })();
+
   // ---------- Tabbed feature showcase (swipeable like Android ViewPager) ----------
   (function () {
     var tabs = document.querySelectorAll(".showcase-tab");
