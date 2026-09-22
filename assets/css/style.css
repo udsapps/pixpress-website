@@ -214,6 +214,9 @@ a { color: var(--color-primary); }
   cursor: pointer;
 }
 .nav-toggle svg { width: 20px; height: 20px; color: var(--color-text); }
+.nav-toggle .icon-close { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-menu { display: none; }
+.nav-toggle[aria-expanded="true"] .icon-close { display: block; }
 
 .mobile-nav {
   display: none;
@@ -877,6 +880,35 @@ h1, h2, h3 { color: var(--color-ink); font-weight: 800; letter-spacing: -0.02em;
 }
 @media (prefers-reduced-motion: reduce) {
   .bento-desc { transition: none; }
+}
+
+/* Below 860px there's no real hover, some touch browsers simulate it on
+   first tap, which hid the title/icon behind clipped description text.
+   Skip the reveal entirely and show both stacked and always visible. */
+@media (max-width: 859px) {
+  .bento-tile {
+    overflow: visible;
+    min-height: 0;
+  }
+  .bento-tile .tile-front,
+  .bento-card:hover .tile-front,
+  .bento-card:focus-within .tile-front {
+    opacity: 1;
+    transform: none;
+    height: auto;
+    justify-content: flex-start;
+  }
+  .bento-desc,
+  .bento-card:hover .bento-desc,
+  .bento-card:focus-within .bento-desc {
+    position: static;
+    inset: auto;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    padding: 10px 0 0;
+    margin: 0;
+  }
 }
 
 /* ---------- How it works ---------- */

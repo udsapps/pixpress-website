@@ -86,12 +86,14 @@
     navToggle.addEventListener("click", function () {
       var isOpen = mobileNav.classList.toggle("is-open");
       navToggle.setAttribute("aria-expanded", String(isOpen));
+      navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
     });
 
     mobileNav.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", function () {
         mobileNav.classList.remove("is-open");
         navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Open menu");
       });
     });
   }
