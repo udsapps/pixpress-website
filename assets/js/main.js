@@ -165,6 +165,7 @@
         var isActive = i === index;
         t.classList.toggle("is-active", isActive);
         t.setAttribute("aria-selected", isActive ? "true" : "false");
+        t.setAttribute("tabindex", isActive ? "0" : "-1");
       });
       panels.forEach(function (p, i) {
         p.classList.toggle("is-active", i === index);
@@ -184,6 +185,18 @@
     tabs.forEach(function (tab, i) {
       tab.addEventListener("click", function () {
         setActive(i, true);
+      });
+      // Keyboard: arrows/Home/End move between tabs (roving tabindex), like a native tab list.
+      tab.addEventListener("keydown", function (e) {
+        var next = -1;
+        if (e.key === "ArrowRight") next = (i + 1) % tabs.length;
+        else if (e.key === "ArrowLeft") next = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === "Home") next = 0;
+        else if (e.key === "End") next = tabs.length - 1;
+        if (next === -1) return;
+        e.preventDefault();
+        setActive(next, true);
+        tabs[next].focus();
       });
     });
 
@@ -249,119 +262,6 @@
       });
     }
   }
-
-  // ---------- Hero live compression stat badge ----------
-  (function () {
-    var valueEl = document.getElementById("demoValue");
-    var progressEl = document.getElementById("demoProgress");
-    var heroSection = document.querySelector(".hero");
-    if (!valueEl || !progressEl) return;
-
-    var START_KB = 2400;
-    var TARGET_KB = 100;
-
-    function formatSize(kb) {
-      if (kb >= 1000) {
-        return (kb / 1000).toFixed(1) + " MB";
-      }
-      return Math.round(kb) + " KB";
-    }
-
-    if (prefersReducedMotion) {
-      valueEl.textContent = formatSize(TARGET_KB);
-      progressEl.style.width = "100%";
-      progressEl.classList.add("is-done");
-      return;
-    }
-
-    var COMPRESS_MS = 1700;
-    var HOLD_MS = 1600;
-    var RESET_PAUSE_MS = 650;
-
-    // Only animate while the hero is actually on screen and the tab is visible:
-    // this loop used to run forever in the background, burning CPU/battery for
-    // no visible benefit once the user scrolled past it or switched tabs.
-    var active = false;
-    var pendingTimer = null;
-    var rafId = null;
-
-    function easeOutCubic(t) {
-      return 1 - Math.pow(1 - t, 3);
-    }
-
-    function runCycle() {
-      if (!active) return;
-      var start = null;
-      progressEl.classList.remove("is-done");
-
-      function step(ts) {
-        if (!active) return;
-        if (start === null) start = ts;
-        var elapsed = ts - start;
-        var t = Math.min(1, elapsed / COMPRESS_MS);
-        var eased = easeOutCubic(t);
-        var currentKb = START_KB - (START_KB - TARGET_KB) * eased;
-        valueEl.textContent = formatSize(currentKb);
-        progressEl.style.width = eased * 100 + "%";
-        if (t < 1) {
-          rafId = requestAnimationFrame(step);
-        } else {
-          progressEl.classList.add("is-done");
-          pendingTimer = setTimeout(function () {
-            if (!active) return;
-            progressEl.classList.remove("is-done");
-            valueEl.textContent = formatSize(START_KB);
-            progressEl.style.width = "0%";
-            pendingTimer = setTimeout(runCycle, RESET_PAUSE_MS);
-          }, HOLD_MS);
-        }
-      }
-      rafId = requestAnimationFrame(step);
-    }
-
-    function start() {
-      if (active) return;
-      active = true;
-      runCycle();
-    }
-
-    function stop() {
-      active = false;
-      if (rafId) cancelAnimationFrame(rafId);
-      if (pendingTimer) clearTimeout(pendingTimer);
-      rafId = null;
-      pendingTimer = null;
-    }
-
-    if (heroSection && "IntersectionObserver" in window) {
-      var io = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting && document.visibilityState === "visible") {
-              start();
-            } else {
-              stop();
-            }
-          });
-        },
-        { threshold: 0 }
-      );
-      io.observe(heroSection);
-
-      document.addEventListener("visibilitychange", function () {
-        if (document.visibilityState === "hidden") {
-          stop();
-        } else {
-          var rect = heroSection.getBoundingClientRect();
-          if (rect.bottom > 0 && rect.top < window.innerHeight) {
-            start();
-          }
-        }
-      });
-    } else {
-      start();
-    }
-  })();
 
   // ---------- Hero shot pointer tilt (desktop only) ----------
   (function () {
