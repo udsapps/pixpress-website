@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Privacy Policy | PixPress</title>
-<meta name="description" content="How PixPress handles data: on-device photo compression, what's collected by ads/analytics/crash reporting, and what is never collected.">
+<meta name="description" content="What PixPress does with your photos (processed on your device) and the limited data handled by ads, analytics, crash reporting and purchases.">
 <meta name="theme-color" content="#2F6FED">
 <link rel="canonical" href="https://getpixpress.com/privacy-policy.html">
 <meta name="robots" content="index, follow">
@@ -36,7 +36,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PixPress">
 <meta property="og:title" content="Privacy Policy | PixPress">
-<meta property="og:description" content="How PixPress handles data: on-device photo compression, what's collected by ads/analytics/crash reporting, and what is never collected.">
+<meta property="og:description" content="What PixPress does with your photos (processed on your device) and the limited data handled by ads, analytics, crash reporting and purchases.">
 <meta property="og:image" content="https://getpixpress.com/assets/img/og-image.jpg">
 <meta property="og:url" content="https://getpixpress.com/privacy-policy.html">
 <meta property="og:locale" content="en_IN">
@@ -137,93 +137,142 @@
 
       <span class="section-eyebrow">Privacy</span>
       <h1 class="section-title">Privacy Policy</h1>
-      <p class="legal-updated">Last updated: 25 September 2026</p>
+      <p class="legal-updated">Last updated: 26 September 2026</p>
 
       <div class="legal-content">
         <p>
-          PixPress is a photo compression app built around one core promise: your photos are
-          processed entirely on your device and are never uploaded anywhere. This policy explains,
-          in plain language, exactly what that means, what limited app data is collected to keep
-          PixPress running and free, and what is never collected at all.
+          This policy explains in plain language what PixPress does with your photos, and what limited
+          information the app and the services it uses process.
+        </p>
+
+        <h2>Who we are</h2>
+        <p>
+          PixPress is developed and operated by UDS Studio. On Google Play the app is listed as
+          &ldquo;Photo Compressor: MB to KB&rdquo;. You can reach us at
+          <a href="mailto:uds.apps.dev@gmail.com">uds.apps.dev@gmail.com</a>.
         </p>
 
         <h2>Photos, signatures and documents</h2>
         <p>
-          PixPress compresses, resizes and converts photos entirely on your device. Your photos are
-          never uploaded to a PixPress server, there is no server that touches your images at any
-          point. Compressed files are saved to a location you choose on your device, and PixPress
-          has no way to access, copy or transmit them afterward.
+          PixPress compresses, resizes and converts images locally on your device. PixPress does not
+          upload your selected photos, signatures or documents to PixPress servers, and does not send their
+          contents to advertising, analytics, subscription or notification services.
+        </p>
+        <p>
+          You choose which images to use: through the Android Photo Picker or the system file picker, with the
+          camera, or by sharing images to PixPress from another app. Results are saved to the location you
+          choose. After you export a file, PixPress does not automatically upload or transmit it. If you share a
+          file through the Android share sheet, it goes to the app you pick, and that app's own privacy policy
+          applies.
         </p>
 
-        <h2>Metadata (EXIF and location data)</h2>
+        <h2>Metadata and location information</h2>
         <p>
-          Photos can carry embedded metadata, including GPS location, camera model and timestamp.
-          PixPress reads this metadata locally so you can choose to strip GPS location or all EXIF
-          data before you save or share a photo. This metadata is never read, collected or
-          transmitted by PixPress outside your device, it is only ever used to give you control
-          over what stays in the file you export.
+          Photos can carry metadata such as GPS location, camera model and date. PixPress reads image metadata
+          only on your device, when needed for compression or for the metadata controls that let you remove GPS
+          location or all EXIF data before you save or share. PixPress does not send EXIF data, GPS metadata,
+          camera information or other image metadata to PixPress servers or to third-party analytics,
+          advertising, subscription or notification services. PixPress does not ask for location permission.
         </p>
 
         <h2>Compression history</h2>
         <p>
-          PixPress keeps a local history of your past compressions (thumbnails, file sizes and
-          settings used) so you can revisit or re-export a result later. This history is stored
-          only on your device, in the app's own local storage, and is not synced to any server. You
-          can clear it at any time from within the app.
+          PixPress keeps a local history of your past compressions: references to the files, their sizes and
+          the settings used. It is stored in the app's private storage on your device and is not synced to a
+          server. Entries are removed automatically after 60 days. You can delete a single session in History,
+          or clear the whole history from Settings.
         </p>
 
-        <h2>Permissions PixPress uses</h2>
-        <p>PixPress requests only the permissions it needs to do its job, and nothing is sent off-device as a result of using them:</p>
+        <h2>Permissions</h2>
+        <p>PixPress asks only for what a feature needs:</p>
         <ul>
-          <li><strong>Photos / media access</strong>, to let you pick photos to compress and save the results back to your device.</li>
-          <li><strong>Camera</strong>, only if you choose to capture a new photo directly from within the app.</li>
-          <li><strong>Notifications</strong>, some fire locally on your device, such as a compression-complete alert, and don't involve a server at all. Others, like occasional reminders or announcements, are delivered through <strong>Firebase Cloud Messaging (FCM)</strong>. FCM notifications are broadcast to all installs by topic, not targeted to you individually or based on any personal or usage data.</li>
+          <li><strong>Photos and files.</strong> PixPress does not request broad access to your photo library. You pick images with the Android Photo Picker (or the system file picker), and PixPress can read only the images you select. If you choose a custom save folder, it can write only to that folder. On Android 9 and older, where the system requires it, PixPress may ask for storage permission to save results and to delete original photos when you choose that option. On newer versions, deleting originals uses the system's own confirmation.</li>
+          <li><strong>Camera.</strong> Only when you choose to take a photo inside the app. The photo is kept temporarily in the app's cache and removed automatically.</li>
+          <li><strong>Notifications.</strong> On Android 13 and newer, PixPress asks before sending notifications. Some are created on your device, such as a compression-complete alert or an occasional reminder, and involve no server. Others are push messages sent through Firebase Cloud Messaging (see below).</li>
+          <li><strong>Internet.</strong> Needed for ads, analytics, crash reports, app configuration, purchases and push notifications. Compressing photos does not need a connection.</li>
         </ul>
 
-        <h2>Data PixPress does not collect</h2>
+        <h2>Accounts and personal details</h2>
         <p>
-          PixPress does not ask for or collect personal information such as your name, email
-          address, phone number, or contacts. Creating an account is never required to use the app.
+          PixPress does not require an account and does not ask for your name, email address, phone number,
+          contacts or profile information to use its compression features. The third-party services described
+          below may still process limited device, usage, advertising, diagnostic and purchase information, as
+          explained in the next sections.
         </p>
 
-        <h2>In-app purchases and subscriptions</h2>
+        <h2>Advertising and analytics</h2>
         <p>
-          PixPress offers optional ad-credit rewards and a Pro subscription for extra features.
-          Purchases are processed by <strong>Google Play Billing</strong>, and subscription status
-          is managed through a third-party subscription management service. PixPress does not see
-          or store your payment card details, those are handled entirely by Google Play. The
-          subscription management service receives purchase and subscription status information
-          needed to unlock the features you've paid for; it does not receive your photos.
+          PixPress is supported by ads, and offers optional rewarded ads in exchange for compression credits.
+          To show ads and understand how the app is used, it uses Google Mobile Ads (AdMob), Firebase Analytics
+          and Firebase Crashlytics, plus Meta Audience Network as an ad network through AdMob mediation.
+        </p>
+        <p>
+          Depending on the service, your device settings and your consent choices, these services may process:
+        </p>
+        <ul>
+          <li>advertising and app identifiers, such as the Android advertising ID and a Firebase app instance ID</li>
+          <li>IP address</li>
+          <li>ad interactions, such as ads shown, clicked or watched to completion</li>
+          <li>app interactions, such as which features and compression settings you use, and numbers like file sizes and processing time</li>
+          <li>diagnostic information, such as crash reports, device model and operating system version</li>
+          <li>general device information</li>
+        </ul>
+        <p>
+          Where required, for example in the EEA and UK, PixPress shows a consent message from Google's User
+          Messaging Platform before requesting ads, and you can change your choice later in Settings, under
+          About. What is collected can depend on that choice and on your device's advertising settings.
+        </p>
+
+        <h2>Purchases and subscriptions</h2>
+        <p>
+          PixPress offers an optional Pro subscription. Purchases are processed by Google Play, and PixPress
+          does not see or store your payment card details. PixPress uses <strong>RevenueCat</strong> to manage
+          subscription status. RevenueCat receives an anonymous app user ID that it generates, purchase and
+          subscription information (including the Google Play purchase token), your entitlement status, and
+          basic device information such as device type and operating system. PixPress does not send your name,
+          email address or any photo to RevenueCat. Credits earned from rewarded ads are stored on your device.
         </p>
 
         <h2>Third-party services</h2>
-        <p>PixPress uses the following third-party services:</p>
+        <p>PixPress uses the following third-party services. Each has its own privacy information:</p>
         <ul>
-          <li><strong>Google AdMob</strong>, to show ads and, if you choose to, offer rewarded ads in exchange for compression credits.</li>
-          <li><strong>Meta Audience Network</strong>, an ad network that can serve ads in PixPress through AdMob mediation.</li>
-          <li><strong>Firebase Analytics</strong>, to understand app usage in aggregate (e.g. which features are used).</li>
-          <li><strong>Firebase Crashlytics</strong>, to diagnose crashes and improve stability.</li>
-          <li><strong>Firebase Cloud Messaging (FCM)</strong>, to deliver occasional broadcast notifications (reminders, announcements) to all installs by topic.</li>
-          <li><strong>Google Play Billing</strong> and a third-party subscription management service, to process optional in-app purchases and subscriptions.</li>
+          <li><strong>Google Mobile Ads (AdMob)</strong>, to show ads, including rewarded ads, and to request consent where required. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a> and <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">how Google uses data from apps that use its services</a>.</li>
+          <li><strong>Meta Audience Network</strong>, an ad network that can serve ads in PixPress through AdMob mediation. <a href="https://www.facebook.com/privacy/policy/" target="_blank" rel="noopener">Meta Privacy Policy</a>.</li>
+          <li><strong>Firebase Analytics</strong>, to understand app usage. <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase privacy information</a>.</li>
+          <li><strong>Firebase Crashlytics</strong>, to diagnose crashes and improve stability. It receives crash details and device information, plus a few app details PixPress attaches, such as the number of images, compression mode and output format. <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase privacy information</a>.</li>
+          <li><strong>Firebase Remote Config</strong>, to load app configuration such as feature settings, limits and rollout options. <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase privacy information</a>.</li>
+          <li><strong>Firebase Cloud Messaging (FCM)</strong>, to deliver push notifications. FCM uses an installation-specific registration token for delivery; PixPress keeps this token on your device and does not send it to its own servers. Messages are sent from the Firebase console to installs of the app in general, not personalized to you. PixPress does not currently subscribe devices to FCM topics. <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase privacy information</a>.</li>
+          <li><strong>Google Play</strong>, to process in-app purchases and subscriptions. <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</li>
+          <li><strong>RevenueCat</strong>, to manage subscription status and entitlements. <a href="https://www.revenuecat.com/privacy/" target="_blank" rel="noopener">RevenueCat Privacy Policy</a>.</li>
         </ul>
-        <p>These services may collect limited device and app information, such as:</p>
+        <p>
+          PixPress does not send the contents of your photos, signatures or documents to any of these services.
+        </p>
+
+        <h2>Data retention and deletion</h2>
         <ul>
-          <li>device identifiers (e.g. Advertising ID, FCM registration token, depending on your device settings)</li>
-          <li>IP address, which ad networks use to serve ads for your region and to prevent fraud</li>
-          <li>ad interactions (e.g. ads shown, clicked or watched to completion)</li>
-          <li>app interactions (e.g. screens viewed, feature usage)</li>
-          <li>diagnostic information (e.g. crash logs, device model, OS version)</li>
-          <li>purchase and subscription status (for accounts using in-app purchases)</li>
+          <li><strong>On your device.</strong> Compression history and settings stay until you clear them or uninstall the app. Temporary working files are removed from the app's cache automatically.</li>
+          <li><strong>Exported files.</strong> Photos and PDFs you save to your Gallery, Downloads, Documents or another location stay there until you delete them. Uninstalling PixPress removes its private app data, such as settings and history, but does not delete files you exported.</li>
+          <li><strong>Third-party services.</strong> Data processed by Google, Firebase, Meta and RevenueCat is kept according to their own policies and retention settings. PixPress has no accounts or user profiles, so it cannot look you up by name. You can reset or delete your advertising ID and turn off ad personalization in your Android settings.</li>
+          <li><strong>Questions.</strong> If you have a privacy question, write to <a href="mailto:uds.apps.dev@gmail.com">uds.apps.dev@gmail.com</a>.</li>
         </ul>
-        <p>None of these services ever receive your photos, signatures or documents.</p>
+
+        <h2>Security</h2>
+        <p>
+          Image compression and metadata processing happen locally on your device. PixPress blocks unencrypted
+          (HTTP) network traffic, and its third-party services communicate using the secure connections they
+          provide. PixPress does not send photo, signature or document contents through analytics, advertising,
+          subscription or notification services.
+        </p>
 
         <h2>Your choices</h2>
         <ul>
-          <li>You can manage ad personalization and device advertising settings in your Google/Android settings.</li>
-          <li>Where required (for example in the EEA and UK), PixPress asks for your consent before showing ads, and you can change your choice at any time from Settings, under About.</li>
-          <li>You can disable notifications for PixPress at any time in your device's system settings.</li>
-          <li>You can clear PixPress's local compression history from within the app.</li>
-          <li>Uninstalling the app removes all locally stored PixPress data from your device.</li>
+          <li>Manage ad personalization and reset your advertising ID in your Android settings.</li>
+          <li>Where required, change your ad consent choice from Settings, under About.</li>
+          <li>Turn off notifications for PixPress in your device's settings, or switch off compression alerts in PixPress Settings.</li>
+          <li>Delete a compression session in History, or clear the whole history from Settings.</li>
+          <li>Withdraw camera permission at any time in your device's settings.</li>
+          <li>Delete exported files yourself, or uninstall the app to remove its private data.</li>
         </ul>
 
         <h2>Children's privacy</h2>
@@ -266,7 +315,7 @@
       </ul>
     </div>
     <div class="footer-bottom">
-      <span>&copy; <span id="currentYear">2026</span> UDS Studios. All rights reserved.</span>
+      <span>&copy; <span id="currentYear">2026</span> UDS Studio. All rights reserved.</span>
     </div>
   </div>
 </footer>
