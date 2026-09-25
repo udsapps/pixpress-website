@@ -15,16 +15,16 @@
     </g>
   </g>
   <text x="80" y="260" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="64" font-weight="800" fill="#ffffff">PixPress</text>
-  <text x="80" y="330" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="34" font-weight="600" fill="#EAF0FE">Compress any photo to an exact KB.</text>
-  <text x="80" y="378" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="34" font-weight="600" fill="#EAF0FE">Instantly. 100% offline.</text>
+  <text x="80" y="330" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="34" font-weight="600" fill="#EAF0FE">Compress photos. Save space.</text>
+  <text x="80" y="378" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="34" font-weight="600" fill="#EAF0FE">Fit images under KB upload limits.</text>
 
   <g transform="translate(80,440)">
-    <rect width="420" height="56" rx="12" fill="#ffffff" opacity="0.12"/>
-    <text x="24" y="36" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="20" font-weight="700" fill="#ffffff">UPSC &#183; SSC &#183; IBPS &#183; Banking &#183; NEET &#183; JEE</text>
+    <rect width="520" height="56" rx="12" fill="#ffffff" opacity="0.12"/>
+    <text x="24" y="36" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="20" font-weight="700" fill="#ffffff">Save storage &#183; Meet KB upload limits</text>
   </g>
 
   <g transform="translate(80,520)">
     <circle cx="12" cy="8" r="8" fill="#16A34A"/>
-    <text x="32" y="14" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">No uploads &#183; No cloud &#183; No data leaves your phone</text>
+    <text x="32" y="14" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#ffffff">Compression works offline &#183; Free for Android</text>
   </g>
 </svg>
