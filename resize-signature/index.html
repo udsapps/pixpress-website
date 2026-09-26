@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Compress a Photo to 20 KB on Android | PixPress</title>
-<meta name="description" content="How to get a photo or signature under 20 KB on your Android phone with PixPress: which preset to use, when typing 20 KB works, and what to check before you upload.">
+<title>How to Resize a Signature for an Online Form | PixPress</title>
+<meta name="description" content="Resize and compress a scanned signature on Android so it fits an online form&#x27;s size limit, using PixPress signature presets or your own maximum file size. Works offline.">
 <meta name="theme-color" content="#2F6FED">
-<link rel="canonical" href="https://getpixpress.com/compress-photo-to-20kb/">
+<link rel="canonical" href="https://getpixpress.com/resize-signature/">
 <meta name="robots" content="index, follow">
 
 <script>
@@ -35,10 +35,10 @@
 <!-- Open Graph -->
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="PixPress">
-<meta property="og:title" content="Compress a Photo to 20 KB on Android | PixPress">
-<meta property="og:description" content="How to get a photo or signature under 20 KB on your Android phone with PixPress: which preset to use, when typing 20 KB works, and what to check before you upload.">
+<meta property="og:title" content="How to Resize a Signature for an Online Form | PixPress">
+<meta property="og:description" content="Resize and compress a scanned signature on Android so it fits an online form&#x27;s size limit, using PixPress signature presets or your own maximum file size. Works offline.">
 <meta property="og:image" content="https://getpixpress.com/assets/img/og-image.jpg">
-<meta property="og:url" content="https://getpixpress.com/compress-photo-to-20kb/">
+<meta property="og:url" content="https://getpixpress.com/resize-signature/">
 <meta property="og:locale" content="en_IN">
 
 <link rel="stylesheet" href="/assets/css/style.css">
@@ -63,8 +63,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Compress a photo to 20 KB",
-      "item": "https://getpixpress.com/compress-photo-to-20kb/"
+      "name": "Resize a signature",
+      "item": "https://getpixpress.com/resize-signature/"
     }
   ]
 }
@@ -76,10 +76,26 @@
   "mainEntity": [
     {
       "@type": "Question",
+      "name": "What size should a signature be for an online form?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the form, so always check its instructions. Many ask for between 10 KB and 20 KB, and some allow up to 100 KB. Some also set a minimum size and exact pixel dimensions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can PixPress make a signature exactly 140 × 60 pixels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PixPress resizes by the longest side and does not crop. Crop the signature to the right shape first, then the Exam Signature preset resizes it to 140 pixels wide."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Is PixPress free for this?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Size Limit and all presets are free for up to 25 photos at a time. PixPress is supported by ads, with an optional Pro subscription for larger batches and an ad-free experience."
+        "text": "Yes. PixPress is free for up to 25 photos at a time, including Size Limit and all presets. It is supported by ads, with an optional Pro subscription for batches of up to 200 photos and an ad-free experience."
       }
     },
     {
@@ -88,22 +104,6 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "No. PixPress compresses photos on your phone and does not upload your selected photos to PixPress servers. Compression works offline."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Will my photo look worse at 20 KB?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Some quality loss is normal at a size this small, especially on detailed photos. Use the Compare slider to check the result before you save or upload it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can PixPress make a photo exactly 200 × 230 pixels?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. PixPress resizes by the longest side and does not crop. If a form asks for exact pixel dimensions, crop the photo to the right shape first, then compress it."
       }
     }
   ]
@@ -175,6 +175,17 @@
   .legal-content .guide-list a:hover { color: var(--color-primary); text-decoration: underline; }
   .legal-content .guide-list p { margin: 6px 0 0; font-size: 0.95rem; }
   .legal-content .play-badge { text-decoration: none; }
+  .guide-table-wrap { overflow-x: auto; margin: 0 0 20px; }
+  .guide-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; min-width: 520px; }
+  .guide-table th, .guide-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--color-border); color: var(--color-text-secondary); vertical-align: top; }
+  .guide-table th { color: var(--color-ink); font-weight: 800; }
+  @media (max-width: 599px) {
+    .guide-table { min-width: 0; }
+    .guide-table thead { display: none; }
+    .guide-table tr { display: block; padding: 12px 0; border-bottom: 1px solid var(--color-border); }
+    .guide-table td { display: block; border: 0; padding: 3px 0; }
+    .guide-table td[data-label]::before { content: attr(data-label) ": "; font-weight: 700; color: var(--color-text); }
+  }
 </style>
 </head>
 <body>
@@ -229,51 +240,59 @@
       </a>
 
       <span class="section-eyebrow">Guide</span>
-      <h1 class="section-title">How to compress a photo to 20 KB</h1>
+      <h1 class="section-title">How to resize a signature for an online form</h1>
       <p class="legal-updated">Last updated: 26 September 2026</p>
 
       <div class="legal-content">
         <p>
-          Many online forms ask for a photo or signature under 20 KB. A photo from your phone camera is usually
-          several megabytes, so it has to become smaller in pixels as well as more compressed. Here is how to do that
-          with PixPress on your Android phone. Compression happens on your device and works offline.
+          Online applications often ask for a scanned signature within a small file size, commonly somewhere
+          between 10 KB and 100 KB depending on the form. A phone photo of a signature is usually far larger than
+          that. Here is how to prepare one on your Android phone with PixPress.
         </p>
 
-        <h2>For a photo: use the ID Photo preset</h2>
+        <h2>1. Capture a clean signature</h2>
+        <ul>
+          <li>Sign with a black or dark blue pen on plain white paper.</li>
+          <li>Take the photo in good light, straight on, without shadows.</li>
+          <li>Crop close around the signature in your gallery app, leaving a little white space. PixPress resizes images but does not crop them.</li>
+          <li>If the form gives exact dimensions, such as 140 &times; 60 pixels, crop to that shape first. For 140 &times; 60, that means a strip a little more than twice as wide as it is tall.</li>
+        </ul>
+
+        <h2>2. Choose the preset that matches the form</h2>
+        <p>PixPress has three signature presets. Each one resizes the image by its longest side and keeps the file at or below a set size:</p>
+        <div class="guide-table-wrap">
+          <table class="guide-table">
+            <thead>
+              <tr><th scope="col">Preset</th><th scope="col">Longest side</th><th scope="col">File size</th><th scope="col">For forms that ask for</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Exam Signature</strong></td><td data-label="Longest side">140 px</td><td data-label="File size">15 KB or less</td><td data-label="For forms that ask for">10 to 20 KB, as used by SSC, IBPS, SBI, NEET and JEE</td></tr>
+              <tr><td><strong>UPSC Signature</strong></td><td data-label="Longest side">1000 px</td><td data-label="File size">90 KB or less</td><td data-label="For forms that ask for">20 to 100 KB, as used by UPSC</td></tr>
+              <tr><td><strong>Railway Signature</strong></td><td data-label="Longest side">640 px</td><td data-label="File size">42 KB or less</td><td data-label="For forms that ask for">30 to 49 KB, as used by Railway RRB</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>These presets are shown in the app in India, where these forms are used. Anywhere else, use Size Limit as described below.</p>
+
+        <h2>3. Compress and check it</h2>
         <ol class="guide-steps">
-          <li>Open PixPress and tap <strong>Add Photos</strong>, then pick your photo.</li>
-          <li>In <strong>Compression Settings</strong>, choose <strong>Size Limit</strong>.</li>
-          <li>Open <strong>Quick presets</strong> and choose <strong>ID Photo</strong>. It resizes the photo to 600 pixels on its longest side and keeps the file at or below 15 KB, which fits under a 20 KB limit.</li>
-          <li>Tap <strong>Compress</strong>, check the result with the Compare slider, then save or share it.</li>
+          <li>Open PixPress, tap <strong>Add Photos</strong> and pick your cropped signature.</li>
+          <li>In <strong>Compression Settings</strong>, choose <strong>Size Limit</strong>, open <strong>Quick presets</strong> and pick the signature preset from the list.</li>
+          <li>Tap <strong>Compress</strong>, then use <strong>Compare</strong> to make sure the signature is still clear.</li>
+          <li>Save or share the result, and upload it to the form.</li>
         </ol>
 
-        <div class="guide-shot">
-          <img src="/assets/img/screenshot-settings.webp" alt="Real PixPress screenshot: Compression Settings with Size Limit selected, the Quick presets row, the Maximum file size field and quick sizes from 20 KB to 500 KB" width="560" height="1179" loading="lazy">
-        </div>
-
-        <h2>For a signature: use the Exam Signature preset</h2>
+        <h2>If your form uses a different limit</h2>
         <p>
-          Follow the same steps and choose <strong>Exam Signature</strong> instead. It resizes the image to 140 pixels
-          on its longest side and keeps it at or below 15 KB. Sign on plain white paper and crop close to the
-          signature before you start. The Exam Signature preset is shown in the app in India. For more signature
-          presets and tips, see <a href="/resize-signature/">how to resize a signature for an online form</a>.
+          Choose <strong>Size Limit</strong> and type the form's maximum in <strong>Maximum file size</strong>.
+          PixPress keeps the image at or below it. For very small limits, such as 20 KB, the Exam Signature preset
+          is more reliable, because it also reduces the pixel size.
         </p>
-
-        <h2>Or type 20 KB yourself</h2>
         <p>
-          In Size Limit, tap the <strong>20 KB</strong> quick size, or type 20 in <strong>Maximum file size</strong>.
-          PixPress keeps the image at or below 20 KB if it can. This works well for images that are already small,
-          such as a cropped photo or a scanned signature. A full-size camera photo is often too large to reach 20 KB
-          this way. If a photo is still over the limit, the result screen tells you, and you can use one of the presets
-          above instead.
+          Some forms also set a minimum, for example 30 KB. PixPress never makes a file larger, so if a result comes
+          out below the minimum, start again from your original photo rather than an already compressed copy, and
+          crop a little less tightly.
         </p>
-
-        <h2>Before you upload</h2>
-        <ul>
-          <li><strong>Check the minimum too.</strong> Some forms also set a minimum size, for example 10 KB. A result that is too small can be rejected as well.</li>
-          <li><strong>Check the pixel size.</strong> If the form asks for exact dimensions, such as 200 &times; 230 pixels, crop the photo to that shape first. PixPress resizes by the longest side and does not crop.</li>
-          <li><strong>Use JPEG.</strong> Most forms accept JPEG, and the presets above save in JPEG.</li>
-        </ul>
 
         <div class="guide-note">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5"/><path d="M12 8h.01"/></svg>
@@ -281,20 +300,20 @@
         </div>
 
         <h2>Common questions</h2>
+        <h3>What size should a signature be for an online form?</h3>
+        <p>It depends on the form, so always check its instructions. Many ask for between 10 KB and 20 KB, and some allow up to 100 KB. Some also set a minimum size and exact pixel dimensions.</p>
+        <h3>Can PixPress make a signature exactly 140 × 60 pixels?</h3>
+        <p>PixPress resizes by the longest side and does not crop. Crop the signature to the right shape first, then the Exam Signature preset resizes it to 140 pixels wide.</p>
         <h3>Is PixPress free for this?</h3>
-        <p>Yes. Size Limit and all presets are free for up to 25 photos at a time. PixPress is supported by ads, with an optional Pro subscription for larger batches and an ad-free experience.</p>
+        <p>Yes. PixPress is free for up to 25 photos at a time, including Size Limit and all presets. It is supported by ads, with an optional Pro subscription for batches of up to 200 photos and an ad-free experience.</p>
         <h3>Are my photos uploaded?</h3>
         <p>No. PixPress compresses photos on your phone and does not upload your selected photos to PixPress servers. Compression works offline.</p>
-        <h3>Will my photo look worse at 20 KB?</h3>
-        <p>Some quality loss is normal at a size this small, especially on detailed photos. Use the Compare slider to check the result before you save or upload it.</p>
-        <h3>Can PixPress make a photo exactly 200 × 230 pixels?</h3>
-        <p>No. PixPress resizes by the longest side and does not crop. If a form asks for exact pixel dimensions, crop the photo to the right shape first, then compress it.</p>
 
         <h2>More guides</h2>
         <ul class="guide-list">
           <li><a href="/compress-photos-on-android/">How to compress photos on Android</a><p>Shrink photos in batches to save phone storage or share them faster.</p></li>
           <li><a href="/reduce-photo-size-for-email/">How to reduce photo size for email</a><p>Make photos small enough to attach, then share them straight to your mail app.</p></li>
-          <li><a href="/resize-signature/">How to resize a signature for an online form</a><p>Crop, resize and compress a scanned signature to fit a form's size limit.</p></li>
+          <li><a href="/compress-photo-to-20kb/">How to compress a photo to 20 KB</a><p>Get a photo or signature under 20 KB with the right preset.</p></li>
         </ul>
 
         <div class="guide-cta">

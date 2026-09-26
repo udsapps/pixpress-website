@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Compress a Photo to 20 KB on Android | PixPress</title>
-<meta name="description" content="How to get a photo or signature under 20 KB on your Android phone with PixPress: which preset to use, when typing 20 KB works, and what to check before you upload.">
+<title>How to Compress Photos on Android | PixPress</title>
+<meta name="description" content="Compress photos on your Android phone to save storage or share them faster: pick your photos, use Smart mode, compare before and after, then save. Works offline.">
 <meta name="theme-color" content="#2F6FED">
-<link rel="canonical" href="https://getpixpress.com/compress-photo-to-20kb/">
+<link rel="canonical" href="https://getpixpress.com/compress-photos-on-android/">
 <meta name="robots" content="index, follow">
 
 <script>
@@ -35,10 +35,10 @@
 <!-- Open Graph -->
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="PixPress">
-<meta property="og:title" content="Compress a Photo to 20 KB on Android | PixPress">
-<meta property="og:description" content="How to get a photo or signature under 20 KB on your Android phone with PixPress: which preset to use, when typing 20 KB works, and what to check before you upload.">
+<meta property="og:title" content="How to Compress Photos on Android | PixPress">
+<meta property="og:description" content="Compress photos on your Android phone to save storage or share them faster: pick your photos, use Smart mode, compare before and after, then save. Works offline.">
 <meta property="og:image" content="https://getpixpress.com/assets/img/og-image.jpg">
-<meta property="og:url" content="https://getpixpress.com/compress-photo-to-20kb/">
+<meta property="og:url" content="https://getpixpress.com/compress-photos-on-android/">
 <meta property="og:locale" content="en_IN">
 
 <link rel="stylesheet" href="/assets/css/style.css">
@@ -63,8 +63,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Compress a photo to 20 KB",
-      "item": "https://getpixpress.com/compress-photo-to-20kb/"
+      "name": "Compress photos on Android",
+      "item": "https://getpixpress.com/compress-photos-on-android/"
     }
   ]
 }
@@ -76,10 +76,18 @@
   "mainEntity": [
     {
       "@type": "Question",
+      "name": "Does compressing a photo lower its quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Compression removes detail that is hard to see, so a well-compressed photo looks almost the same on a phone or computer screen. Use the Compare slider to check each result before you save it."
+      }
+    },
+    {
+      "@type": "Question",
       "name": "Is PixPress free for this?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Size Limit and all presets are free for up to 25 photos at a time. PixPress is supported by ads, with an optional Pro subscription for larger batches and an ad-free experience."
+        "text": "Yes. PixPress is free for up to 25 photos at a time, including Size Limit and all presets. It is supported by ads, with an optional Pro subscription for batches of up to 200 photos and an ad-free experience."
       }
     },
     {
@@ -92,18 +100,10 @@
     },
     {
       "@type": "Question",
-      "name": "Will my photo look worse at 20 KB?",
+      "name": "Does PixPress delete my original photos?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Some quality loss is normal at a size this small, especially on detailed photos. Use the Compare slider to check the result before you save or upload it."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can PixPress make a photo exactly 200 × 230 pixels?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. PixPress resizes by the longest side and does not crop. If a form asks for exact pixel dimensions, crop the photo to the right shape first, then compress it."
+        "text": "No. PixPress saves compressed copies to Pictures/PixPress and leaves your originals as they are. You decide whether to delete the originals."
       }
     }
   ]
@@ -175,6 +175,17 @@
   .legal-content .guide-list a:hover { color: var(--color-primary); text-decoration: underline; }
   .legal-content .guide-list p { margin: 6px 0 0; font-size: 0.95rem; }
   .legal-content .play-badge { text-decoration: none; }
+  .guide-table-wrap { overflow-x: auto; margin: 0 0 20px; }
+  .guide-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; min-width: 520px; }
+  .guide-table th, .guide-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--color-border); color: var(--color-text-secondary); vertical-align: top; }
+  .guide-table th { color: var(--color-ink); font-weight: 800; }
+  @media (max-width: 599px) {
+    .guide-table { min-width: 0; }
+    .guide-table thead { display: none; }
+    .guide-table tr { display: block; padding: 12px 0; border-bottom: 1px solid var(--color-border); }
+    .guide-table td { display: block; border: 0; padding: 3px 0; }
+    .guide-table td[data-label]::before { content: attr(data-label) ": "; font-weight: 700; color: var(--color-text); }
+  }
 </style>
 </head>
 <body>
@@ -229,72 +240,69 @@
       </a>
 
       <span class="section-eyebrow">Guide</span>
-      <h1 class="section-title">How to compress a photo to 20 KB</h1>
+      <h1 class="section-title">How to compress photos on Android</h1>
       <p class="legal-updated">Last updated: 26 September 2026</p>
 
       <div class="legal-content">
         <p>
-          Many online forms ask for a photo or signature under 20 KB. A photo from your phone camera is usually
-          several megabytes, so it has to become smaller in pixels as well as more compressed. Here is how to do that
-          with PixPress on your Android phone. Compression happens on your device and works offline.
+          A photo from a modern phone camera is often several megabytes. Compressing it keeps the same picture at a
+          much smaller file size, which frees up storage and makes photos quicker to send. PixPress does this on
+          your Android phone, many photos at a time, without uploading them anywhere.
         </p>
 
-        <h2>For a photo: use the ID Photo preset</h2>
+        <h2>Compress photos in five steps</h2>
         <ol class="guide-steps">
-          <li>Open PixPress and tap <strong>Add Photos</strong>, then pick your photo.</li>
-          <li>In <strong>Compression Settings</strong>, choose <strong>Size Limit</strong>.</li>
-          <li>Open <strong>Quick presets</strong> and choose <strong>ID Photo</strong>. It resizes the photo to 600 pixels on its longest side and keeps the file at or below 15 KB, which fits under a 20 KB limit.</li>
-          <li>Tap <strong>Compress</strong>, check the result with the Compare slider, then save or share it.</li>
+          <li>Open PixPress and tap <strong>Add Photos</strong>, then pick one photo or up to 25 at once. You can also share photos to PixPress from your gallery app.</li>
+          <li>In <strong>Compression Settings</strong>, choose <strong>Smart</strong>. Smart mode tries JPEG and WebP for each photo and keeps whichever comes out smaller.</li>
+          <li>Tap <strong>Compress</strong>.</li>
+          <li>On the result screen, tap <strong>Compare</strong> and drag the slider to check the compressed photo against the original.</li>
+          <li>Tap <strong>Save All</strong>. The compressed copies are saved to <strong>Pictures/PixPress</strong>, and your original photos are not changed.</li>
         </ol>
 
         <div class="guide-shot">
-          <img src="/assets/img/screenshot-settings.webp" alt="Real PixPress screenshot: Compression Settings with Size Limit selected, the Quick presets row, the Maximum file size field and quick sizes from 20 KB to 500 KB" width="560" height="1179" loading="lazy">
+          <img src="/assets/img/screenshot-result.webp" alt="Real PixPress screenshot: Result screen showing a batch reduced from 29.9 MB to 2.3 MB, with a percentage saved on each photo" width="560" height="1179" loading="lazy">
         </div>
 
-        <h2>For a signature: use the Exam Signature preset</h2>
-        <p>
-          Follow the same steps and choose <strong>Exam Signature</strong> instead. It resizes the image to 140 pixels
-          on its longest side and keeps it at or below 15 KB. Sign on plain white paper and crop close to the
-          signature before you start. The Exam Signature preset is shown in the app in India. For more signature
-          presets and tips, see <a href="/resize-signature/">how to resize a signature for an online form</a>.
-        </p>
-
-        <h2>Or type 20 KB yourself</h2>
-        <p>
-          In Size Limit, tap the <strong>20 KB</strong> quick size, or type 20 in <strong>Maximum file size</strong>.
-          PixPress keeps the image at or below 20 KB if it can. This works well for images that are already small,
-          such as a cropped photo or a scanned signature. A full-size camera photo is often too large to reach 20 KB
-          this way. If a photo is still over the limit, the result screen tells you, and you can use one of the presets
-          above instead.
-        </p>
-
-        <h2>Before you upload</h2>
+        <h2>Which mode to choose</h2>
         <ul>
-          <li><strong>Check the minimum too.</strong> Some forms also set a minimum size, for example 10 KB. A result that is too small can be rejected as well.</li>
-          <li><strong>Check the pixel size.</strong> If the form asks for exact dimensions, such as 200 &times; 230 pixels, crop the photo to that shape first. PixPress resizes by the longest side and does not crop.</li>
-          <li><strong>Use JPEG.</strong> Most forms accept JPEG, and the presets above save in JPEG.</li>
+          <li><strong>Smart</strong> suits most photos. You do not need to know anything about formats or quality.</li>
+          <li><strong>Custom</strong> lets you set the format, quality and maximum dimension yourself, or start from a preset such as WhatsApp, Instagram or Email.</li>
+          <li><strong>Size Limit</strong> is for when a website or app has an upload limit. Set a maximum file size from 10 KB to 5,000 KB and PixPress keeps each photo at or below it.</li>
         </ul>
+
+        <h2>Using compression to free up storage</h2>
+        <p>
+          PixPress saves compressed copies instead of replacing your photos, so nothing is lost if a result is not
+          what you wanted. The result screen shows how much space the batch saved. Once you have compared the photos
+          and are happy with them, you can delete the larger originals in your gallery app to get that space back.
+        </p>
+
+        <h2>Supported photos</h2>
+        <p>
+          PixPress opens JPG, PNG and WebP photos, plus HEIC on Android 9 and newer. It saves in JPEG or WebP, and in
+          PNG when you need a lossless or transparent image (a Pro feature). It works on Android 7.0 and newer.
+        </p>
 
         <div class="guide-note">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5"/><path d="M12 8h.01"/></svg>
-          <p>PixPress is an independent image compression app and is not affiliated with or endorsed by any exam board, recruitment board or government agency. Requirements change, so always check the latest rules on the official portal.</p>
+          <p>When PixPress compresses a photo, it removes the GPS location by default, so the copy you share does not reveal where it was taken. You can change this under Metadata Privacy.</p>
         </div>
 
         <h2>Common questions</h2>
+        <h3>Does compressing a photo lower its quality?</h3>
+        <p>Compression removes detail that is hard to see, so a well-compressed photo looks almost the same on a phone or computer screen. Use the Compare slider to check each result before you save it.</p>
         <h3>Is PixPress free for this?</h3>
-        <p>Yes. Size Limit and all presets are free for up to 25 photos at a time. PixPress is supported by ads, with an optional Pro subscription for larger batches and an ad-free experience.</p>
+        <p>Yes. PixPress is free for up to 25 photos at a time, including Size Limit and all presets. It is supported by ads, with an optional Pro subscription for batches of up to 200 photos and an ad-free experience.</p>
         <h3>Are my photos uploaded?</h3>
         <p>No. PixPress compresses photos on your phone and does not upload your selected photos to PixPress servers. Compression works offline.</p>
-        <h3>Will my photo look worse at 20 KB?</h3>
-        <p>Some quality loss is normal at a size this small, especially on detailed photos. Use the Compare slider to check the result before you save or upload it.</p>
-        <h3>Can PixPress make a photo exactly 200 × 230 pixels?</h3>
-        <p>No. PixPress resizes by the longest side and does not crop. If a form asks for exact pixel dimensions, crop the photo to the right shape first, then compress it.</p>
+        <h3>Does PixPress delete my original photos?</h3>
+        <p>No. PixPress saves compressed copies to Pictures/PixPress and leaves your originals as they are. You decide whether to delete the originals.</p>
 
         <h2>More guides</h2>
         <ul class="guide-list">
-          <li><a href="/compress-photos-on-android/">How to compress photos on Android</a><p>Shrink photos in batches to save phone storage or share them faster.</p></li>
           <li><a href="/reduce-photo-size-for-email/">How to reduce photo size for email</a><p>Make photos small enough to attach, then share them straight to your mail app.</p></li>
-          <li><a href="/resize-signature/">How to resize a signature for an online form</a><p>Crop, resize and compress a scanned signature to fit a form's size limit.</p></li>
+          <li><a href="/resize-signature/">How to resize a signature for an online form</a><p>Crop, resize and compress a scanned signature to fit a form&#x27;s size limit.</p></li>
+          <li><a href="/compress-photo-to-20kb/">How to compress a photo to 20 KB</a><p>Get a photo or signature under 20 KB with the right preset.</p></li>
         </ul>
 
         <div class="guide-cta">
