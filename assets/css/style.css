@@ -338,7 +338,9 @@ a { color: var(--color-primary); }
 .play-badge .play-copy strong { font-size: 1.12rem; font-weight: 600; font-family: Georgia, "Times New Roman", serif; }
 
 /* ---------- Scroll reveal ---------- */
-.reveal {
+/* Only hidden when JS is running (html.js is set in <head>), so the content is visible to
+   crawlers, link previews and no-JS clients. */
+.js .reveal {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.7s cubic-bezier(.16,.8,.3,1), transform 0.7s cubic-bezier(.16,.8,.3,1);
@@ -800,7 +802,7 @@ h1, h2, h3 { color: var(--color-ink); font-weight: 800; letter-spacing: -0.02em;
 }
 
 /* Springy pop-in for the features grid, distinct from the site's default fade-up reveal */
-.bento-tile.reveal {
+.js .bento-tile.reveal {
   transition: opacity 0.6s cubic-bezier(.34,1.56,.64,1), transform 0.6s cubic-bezier(.34,1.56,.64,1);
   transform: translateY(24px) scale(0.9);
 }

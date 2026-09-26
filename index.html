@@ -10,6 +10,7 @@
 <meta name="google-site-verification" content="DOhx0VFUbeDptTZyblOmYgxyAV69264hqDnPJc1pcv8" />
 
 <script>
+  document.documentElement.classList.add("js");
   (function () {
     try {
       var stored = localStorage.getItem("pixpress-theme");
@@ -41,6 +42,7 @@
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PixPress: Compress photos. Save space. Fit images under KB upload limits.">
 <meta property="og:url" content="https://getpixpress.com/">
 <meta property="og:locale" content="en_IN">
 
@@ -49,36 +51,70 @@
 <meta name="twitter:title" content="PixPress: Compress Photos &amp; Save Phone Storage">
 <meta name="twitter:description" content="Compress photos on your Android phone to save storage or fit under a KB upload limit. Compression works offline, and your selected photos are not uploaded to PixPress servers.">
 <meta name="twitter:image" content="https://getpixpress.com/assets/img/og-image.jpg">
+<meta name="twitter:image:alt" content="PixPress: Compress photos. Save space. Fit images under KB upload limits.">
 
 <link rel="stylesheet" href="assets/css/style.css">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "PixPress: Photo Compressor",
-  "alternateName": "PixPress - Photo Compressor & Resizer",
-  "applicationCategory": "PhotographyApplication",
-  "operatingSystem": "Android",
-  "url": "https://getpixpress.com/",
-  "description": "Photo compressor for Android. Save phone storage or keep an image at or below a maximum file size for uploads. Compression runs on your device.",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD",
-    "category": "free"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "UDS Studio"
-  },
-  "installUrl": "https://play.google.com/store/apps/details?id=com.uds.pixpress",
-  "screenshot": [
-    "https://getpixpress.com/assets/img/screenshot-result.webp",
-    "https://getpixpress.com/assets/img/screenshot-settings.webp",
-    "https://getpixpress.com/assets/img/screenshot-comparison.webp",
-    "https://getpixpress.com/assets/img/screenshot-batch.webp",
-    "https://getpixpress.com/assets/img/screenshot-pdf.webp"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://getpixpress.com/#website",
+      "url": "https://getpixpress.com/",
+      "name": "PixPress",
+      "alternateName": "PixPress Photo Compressor",
+      "inLanguage": "en",
+      "publisher": {
+        "@id": "https://getpixpress.com/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://getpixpress.com/#organization",
+      "name": "UDS Studio",
+      "url": "https://getpixpress.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://getpixpress.com/assets/img/icon-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "email": "uds.apps.dev@gmail.com",
+      "sameAs": [
+        "https://play.google.com/store/apps/developer?id=UDS+Studio"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "PixPress: Photo Compressor",
+      "alternateName": "PixPress - Photo Compressor & Resizer",
+      "applicationCategory": "PhotographyApplication",
+      "operatingSystem": "Android",
+      "url": "https://getpixpress.com/",
+      "description": "Photo compressor for Android. Save phone storage or keep an image at or below a maximum file size for uploads. Compression runs on your device.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "category": "free"
+      },
+      "publisher": {
+        "@id": "https://getpixpress.com/#organization"
+      },
+      "installUrl": "https://play.google.com/store/apps/details?id=com.uds.pixpress",
+      "screenshot": [
+        "https://getpixpress.com/assets/img/screenshot-result.webp",
+        "https://getpixpress.com/assets/img/screenshot-settings.webp",
+        "https://getpixpress.com/assets/img/screenshot-comparison.webp",
+        "https://getpixpress.com/assets/img/screenshot-batch.webp",
+        "https://getpixpress.com/assets/img/screenshot-pdf.webp"
+      ],
+      "@id": "https://getpixpress.com/#app",
+      "image": "https://getpixpress.com/assets/img/icon-512.png",
+      "inLanguage": "en"
+    }
   ]
 }
 </script>
